@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background:url('https://wallpapers.com/images/hd/black-windows-1920-x-1080-background-4u3ypj951h9s91fb.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+        .login-container {
+            background: transparent;
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+        }
+        
+        .login-container h1 {
+            margin-bottom: 25px;
+            color: #f7f5f5;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            /* border: 1px solid #ccc; */
+            border-radius: 5px;
+            text-decoration: none;
+            outline: none;
+        }
+        input:focus {
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Light border */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Soft glow */
+}
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background: #4facfe;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+        .login-container button:hover {
+            background: #0484fc;
+            color: rgb(247, 245, 245);
+        }
+        .label{
+            margin-right: 205px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+    <h1>SignUp</h1>
+   <form action="/user" method="post">
+    <input type="text" required name="name" placeholder="enter your full Name"/>
+    <input type="email" required name="email" placeholder="enter your email"/>
+    <input type="password" required name="password" placeholder="enter your password"/>
+
+    <button type="submit">SignUp</button>
+</div>
+   </form>
+</body>
+</html>
