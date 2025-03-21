@@ -15,7 +15,9 @@ const dotenv=require('dotenv').config();
 const app=express(); 
 const port=8001;
 
-connectMongoDB("mongodb://localhost:27017/short-url"||process.env.MONGO_URI).then(()=>console.log("mongodb connected"));
+connectMongoDB(process.env.MONGO_URI || "mongodb://localhost:27017/short-url")
+  .then(() => console.log("MongoDB connected"));
+
 
 app.set("view engine","ejs");
 app.set('views',path.resolve('./views'));
