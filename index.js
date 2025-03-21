@@ -16,7 +16,8 @@ const app=express();
 const port=8001;
 
 connectMongoDB(process.env.MONGO_URI || "mongodb://localhost:27017/short-url")
-  .then(() => console.log("MongoDB connected"));
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 
 app.set("view engine","ejs");
