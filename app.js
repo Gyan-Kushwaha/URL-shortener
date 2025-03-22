@@ -13,12 +13,9 @@ const dotenv=require('dotenv').config();
 
 
 const app=express(); 
-const port=process.env.PORT
+const PORT=process.env.PORT || 8001
 
-connectMongoDB(process.env.MONGO_URI || "mongodb://localhost:27017/short-url",{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+connectMongoDB(process.env.MONGO_URL || process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
@@ -29,10 +26,8 @@ app.set('views',path.resolve('./views'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use((err, req, res, next) => {
-    console.error("Internal Server Error:", err);
-    res.status(500).json({ error: "Something went wrong", details: err.message });
-  });
+
+
   
 app.use("/url", restrictLoggedInUserOnly,urlRoute);
 app.use('/user',userRoute);
@@ -66,4 +61,4 @@ app.get('/url/:shortId',async (req,res)=>{
 res.redirect(entry.redirestUrl);
 });
 
-app.listen(port,()=>console.log(`server started at port no: ${port}`));
+app.listen(PORT,()=>console.log(`server started at port no: ${PORT}`));
