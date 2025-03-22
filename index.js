@@ -13,7 +13,7 @@ const dotenv=require('dotenv').config();
 
 
 const app=express(); 
-const port=8001;
+const port=process.env.PORT
 
 connectMongoDB(process.env.MONGO_URI || "mongodb://localhost:27017/short-url")
   .then(() => console.log("MongoDB connected"))
