@@ -15,7 +15,10 @@ const dotenv=require('dotenv').config();
 const app=express(); 
 const port=process.env.PORT
 
-connectMongoDB(process.env.MONGO_URI || "mongodb://localhost:27017/short-url")
+connectMongoDB(process.env.MONGO_URI || "mongodb://localhost:27017/short-url",{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
@@ -26,7 +29,11 @@ app.set('views',path.resolve('./views'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
+app.use((err, req, res, next) => {
+    console.error("Internal Server Error:", err);
+    res.status(500).json({ error: "Something went wrong", details: err.message });
+  });
+  
 app.use("/url", restrictLoggedInUserOnly,urlRoute);
 app.use('/user',userRoute);
 app.use('/',checkAuth,staticRoute);
